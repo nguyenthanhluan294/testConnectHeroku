@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>title</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-bottom:10px">
+      Create Account
+    </button>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%
+    for(i=0; i<data.length; i++){ %>
+      <tr>
+        <td>
+          <%=data[i].Id %>
+        </td>
+        <td>
+          <%=data[i].Name %>
+        </td>
+        <td>
+          <button type="button" class="btn btn-primary" data-toggle="modal" onclick="editAccount('<%=data[i].Id %>' , '<%=data[i].Name %>')">
+            Edit Account
+          </button>
+            <button type="submit" class="btn btn-primary" data-toggle="modal" onclick="deleteAccount('<%=data[i].Id %>')">
+            Delete
+          </button>
+        </td>
+      </tr>
+<%}%> 
+  </tbody>
+</table>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Create New Account</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form action="/create" method="post">
+      <!-- Modal body -->
+      <div class="modal-body">
+        
+          <div class="form-group">
+            <label for="email">Account Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Account Name">
+          </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="myModalEdit">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Create New Account</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form action="/update" method="post">
+      <!-- Modal body -->
+      <div class="modal-body">
+        <input type="hidden" id="id" name="id" class="form-control">
+          <div class="form-group">
+            <label for="email">Account Name</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="Account Name">
+          </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="myModalDelete">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Xác Nhận Xóa</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form action="/delete" method="post">
+      <!-- Modal body -->
+      <div class="modal-body">
+        <input type="hidden" id="idDelete" name="idDelete" class="form-control">
+        <p>Bạn có chắc chắn muốn xóa không?</p>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Xóa</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function editAccount(a , b){
+    document.getElementById("id").value = a;
+    document.getElementById("name").value = b;
+    $("#myModalEdit").modal()
+  }
+  function deleteAccount(a){
+    document.getElementById("idDelete").value = a;
+    $("#myModalDelete").modal()
+  }
+</script>
+  </body>
+</html>
