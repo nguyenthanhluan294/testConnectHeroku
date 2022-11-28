@@ -4,8 +4,8 @@ const path = require('path');
 var jsforce = require('jsforce');
 const app = express();
 require('dotenv').config();
-
 var conn;
+var LoginUrl;
 // const {LOGIN_URL, SALESFORCE_USERNAME , SALESFORCE_PASSWORD , SALESFORCE_TOKEN } = process.env
 // const conn = new jsforce.Connection({/
 //     loginUrl: LOGIN_URL
@@ -32,7 +32,7 @@ var conn;
 const {LOGIN_URL, SALESFORCE_USERNAME , SALESFORCE_PASSWORD , SALESFORCE_TOKEN ,  CONSUMER_ID, CONSUMER_SECRET, SALESFORCE_CALLBACK} = process.env
 var oauth2 = new jsforce.OAuth2({
   // you can change loginUrl to connect to sandbox or prerelease env.
-  loginUrl : process.env.LOGIN_URL,
+  loginUrl : LoginUrl,
   clientId : process.env.CONSUMER_ID,
   clientSecret : process.env.CONSUMER_SECRET,
   redirectUri :  process.env.SALESFORCE_CALLBACK
@@ -41,12 +41,23 @@ var oauth2 = new jsforce.OAuth2({
 // Get authorization url and redirect to it.
 //
 router.get('/oauth2/auth', function(req, res) {
-  res.redirect(oauth2.getAuthorizationUrl({ scope : 'api id web refresh_token' }));
+    console.log(req.param('enviroment'));
+    if(req.param('enviroment') == 'production'){
+        LoginUrl = 'login.salesforce.com';
+    }
+    else{
+        LoginUrl = 'test.salesforce.com';
+    }
+  res.redirect(oauth2.getAuthorizationUrl({  }));
 });
 
-router.get('/getAccessToken', function(req, res) {
+router.get('/', function(req, res){
+    res.render('login');
+});
+
+router.get('/gettoken', function(req, res) {
     conn = new jsforce.Connection({ oauth2 : oauth2 });
-    var code = req.body.code;
+    var code = req.param('code');
     conn.authorize(code, function(err, userInfo) {
       if (err) { return console.error(err); }
       // Now you can get the access token, refresh token, and instance URL information.
@@ -57,7 +68,7 @@ router.get('/getAccessToken', function(req, res) {
       console.log("User ID: " + userInfo.id);
       console.log("Org ID: " + userInfo.organizationId);
       // ...
-      res.send('success'); // or your desired response
+      res.redirect('/index');// or your desired response
     });
   });
 router.get('/index' , (req , res)=>{
@@ -79,8 +90,7 @@ router.post('/create' , (req , res)=>{
             return console.error(err);
         }
         else {
-            res.redirect('/');
-
+            res.redirect('/index');
         }
     })
 })
@@ -91,8 +101,7 @@ router.post('/update' , (req , res)=>{
             return console.error(err);
         }
         else {
-            res.redirect('/');
-
+            res.redirect('/index');
         }
     })
 })
@@ -104,8 +113,7 @@ router.post('/delete' , (req , res)=>{
             return console.error(err);
         }
         else {
-            res.redirect('/');
-
+            res.redirect('/index');
         }
     })
 })
