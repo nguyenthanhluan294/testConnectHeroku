@@ -42,7 +42,7 @@ var oauth2 = new jsforce.OAuth2({
 //
 router.get('/oauth2/auth', function(req, res) {
     console.log(req.param('enviroment'));
-    if(req.param('enviroment') == 'test'){
+    if(req.param('enviroment') === 'test'){
         LoginUrl = 'test.salesforce.com';
     }
     else{
