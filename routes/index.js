@@ -10,7 +10,7 @@ var url;
 const {LOGIN_URL, SALESFORCE_USERNAME , SALESFORCE_PASSWORD , SALESFORCE_TOKEN ,  CONSUMER_ID, CONSUMER_SECRET, SALESFORCE_CALLBACK} = process.env
 var oauth2 = new jsforce.OAuth2({
   // you can change loginUrl to connect to sandbox or prerelease env.
-  loginUrl : 'test.salesforce.com',
+  loginUrl : this.url,
   clientId : process.env.CONSUMER_ID,
   clientSecret : process.env.CONSUMER_SECRET,
   redirectUri :  process.env.SALESFORCE_CALLBACK
@@ -21,10 +21,10 @@ var oauth2 = new jsforce.OAuth2({
 router.get('/oauth2/auth', function(req, res) {
     console.log(req.param('enviroment'));
     if(req.param('enviroment') === 'test'){
-        url = 'test.salesforce.com';
+        url = 'https://test.salesforce.com';
     }
     else{
-        url = 'test.salesforce.com';
+        url = 'https://login.salesforce.com';
     }
   res.redirect(oauth2.getAuthorizationUrl({  }));
 });
