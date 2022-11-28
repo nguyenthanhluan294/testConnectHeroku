@@ -6,33 +6,11 @@ const app = express();
 require('dotenv').config();
 var conn;
 var url;
-// const {LOGIN_URL, SALESFORCE_USERNAME , SALESFORCE_PASSWORD , SALESFORCE_TOKEN } = process.env
-// const conn = new jsforce.Connection({/
-//     loginUrl: LOGIN_URL
-// });
 
-
-//  conn.login(process.env.SALESFORCE_USERNAME , process.env.SALESFORCE_PASSWORD+process.env.SALESFORCE_TOKEN , function(err, userInfo) {
-//    if (err) { 
-//      return console.error(err); 
-//  }
-//  else{
-//     console.log(conn.accessToken);
-//     console.log(conn.instanceUrl);
-//     console.log("User ID: " + userInfo.id);
-//     console.log("Org ID: " + userInfo.organizationId);
-//  }
-
-// });
-
-
-//
-// OAuth2 client information can be shared with multiple connections.
-//
 const {LOGIN_URL, SALESFORCE_USERNAME , SALESFORCE_PASSWORD , SALESFORCE_TOKEN ,  CONSUMER_ID, CONSUMER_SECRET, SALESFORCE_CALLBACK} = process.env
 var oauth2 = new jsforce.OAuth2({
   // you can change loginUrl to connect to sandbox or prerelease env.
-  loginUrl : url,
+  loginUrl : 'test.salesforce.com',
   clientId : process.env.CONSUMER_ID,
   clientSecret : process.env.CONSUMER_SECRET,
   redirectUri :  process.env.SALESFORCE_CALLBACK
