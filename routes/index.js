@@ -46,7 +46,7 @@ router.get('/oauth2/auth', function(req, res) {
         url = 'test.salesforce.com';
     }
     else{
-        url = 'login.salesforce.com';
+        url = 'test.salesforce.com';
     }
   res.redirect(oauth2.getAuthorizationUrl({  }));
 });
