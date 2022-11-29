@@ -26,7 +26,7 @@ router.get('/oauth2/auth', function(req, res) {
             clientSecret : process.env.CONSUMER_SECRET,
             redirectUri :  process.env.SALESFORCE_CALLBACK
           });
-          res.redirect(oauth2.getAuthorizationUrl({  }));
+          oauth2.getAuthorizationUrl({  });
     }
     else{
          oauth2 = new jsforce.OAuth2({
@@ -36,7 +36,7 @@ router.get('/oauth2/auth', function(req, res) {
             clientSecret : process.env.CONSUMER_SECRET,
             redirectUri :  process.env.SALESFORCE_CALLBACK
           });
-          res.redirect(oauth2.getAuthorizationUrl({  }));
+          oauth2.getAuthorizationUrl({  });
     }
  
  res.redirect(oauth2.getAuthorizationUrl({  }));
