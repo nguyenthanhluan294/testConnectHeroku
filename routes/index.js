@@ -64,16 +64,6 @@ router.get('/index' , (req , res)=>{
     })
 })
 
-router.get('/logOut' , (req , res)=>{
-    var connn = new jsforce.Connection({
-        sessionId : conn.accessToken,
-        serverUrl : '/'
-      });
-      connn.logout(function(err) {
-        if (err) { return console.error(err); }
-        // now the sess
-})
-})
 router.post('/create' , (req , res)=>{
     conn.sobject("Account").create({ Name: req.body.name}, function(err, result) {
         if (err) { 
