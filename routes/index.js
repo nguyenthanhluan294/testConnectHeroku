@@ -7,31 +7,40 @@ require('dotenv').config();
 var conn;
 var url;
 const {LOGIN_URL, SALESFORCE_USERNAME , SALESFORCE_PASSWORD , SALESFORCE_TOKEN ,  CONSUMER_ID, CONSUMER_SECRET, SALESFORCE_CALLBACK} = process.env
-var oauth2 = new jsforce.OAuth2({
-  // you can change loginUrl to connect to sandbox or prerelease env.
-  loginUrl : this.url,
-  clientId : process.env.CONSUMER_ID,
-  clientSecret : process.env.CONSUMER_SECRET,
-  redirectUri :  process.env.SALESFORCE_CALLBACK
-});
+// var oauth2 = new jsforce.OAuth2({
+//   // you can change loginUrl to connect to sandbox or prerelease env.
+//   loginUrl : this.url,
+//   clientId : process.env.CONSUMER_ID,
+//   clientSecret : process.env.CONSUMER_SECRET,
+//   redirectUri :  process.env.SALESFORCE_CALLBACK
+// });
 //
 // Get authorization url and redirect to it.
 //
 router.get('/oauth2/auth', function(req, res) {
     if(req.query.enviroment == 'test'){
         this.url = 'https://test.salesforce.com';
+        var oauth2 = new jsforce.OAuth2({
+            // you can change loginUrl to connect to sandbox or prerelease env.
+            loginUrl : this.url,
+            clientId : process.env.CONSUMER_ID,
+            clientSecret : process.env.CONSUMER_SECRET,
+            redirectUri :  process.env.SALESFORCE_CALLBACK
+          });
+          res.redirect(oauth2.getAuthorizationUrl({  }));
     }
     else{
         this.url = 'https://login.salesforce.com';
+        var oauth2 = new jsforce.OAuth2({
+            // you can change loginUrl to connect to sandbox or prerelease env.
+            loginUrl : this.url,
+            clientId : process.env.CONSUMER_ID,
+            clientSecret : process.env.CONSUMER_SECRET,
+            redirectUri :  process.env.SALESFORCE_CALLBACK
+          });
+          res.redirect(oauth2.getAuthorizationUrl({  }));
     }
-    console.log(url);
-    oauth2 = new jsforce.OAuth2({
-        // you can change loginUrl to connect to sandbox or prerelease env.
-        loginUrl : this.url,
-        clientId : process.env.CONSUMER_ID,
-        clientSecret : process.env.CONSUMER_SECRET,
-        redirectUri :  process.env.SALESFORCE_CALLBACK
-      });
+ 
  res.redirect(oauth2.getAuthorizationUrl({  }));
 });
 
