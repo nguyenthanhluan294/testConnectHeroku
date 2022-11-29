@@ -17,6 +17,33 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModallogout" style="margin-bottom:10px">
+      Log out
+    </button>
+    <div class="modal" id="myModallogout">
+      <div class="modal-dialog">
+        <div class="modal-content">
+    
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Log Out</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <form action="/logOut" method="get">
+          <!-- Modal body -->
+          <div class="modal-body">
+           Bạn có chắc chắn muốn đăng xuất không?
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Log Out</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-bottom:10px">
       Create Account
     </button>

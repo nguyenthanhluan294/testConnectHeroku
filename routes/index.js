@@ -7,8 +7,6 @@ require('dotenv').config();
 var conn;
 var oauth2;
 const {LOGIN_URL, SALESFORCE_USERNAME , SALESFORCE_PASSWORD , SALESFORCE_TOKEN ,  CONSUMER_ID, CONSUMER_SECRET, SALESFORCE_CALLBACK} = process.env
-
-
 router.get('/oauth2/auth', function(req, res) {
     if(req.query.enviroment == 'test'){
         oauth2 = new jsforce.OAuth2({
@@ -48,6 +46,7 @@ router.get('/gettoken', function(req, res) {
       console.log(conn.instanceUrl);
       console.log("User ID: " + userInfo.id);
       console.log("Org ID: " + userInfo.organizationId);
+      
       // ...
       res.redirect('/index');// or your desired response
     });
@@ -65,6 +64,16 @@ router.get('/index' , (req , res)=>{
     })
 })
 
+router.get('/logOut' , (req , res)=>{
+    var connn = new jsforce.Connection({
+        sessionId : conn.accessToken,
+        serverUrl : '/'
+      });
+      connn.logout(function(err) {
+        if (err) { return console.error(err); }
+        // now the sess
+})
+})
 router.post('/create' , (req , res)=>{
     conn.sobject("Account").create({ Name: req.body.name}, function(err, result) {
         if (err) { 
