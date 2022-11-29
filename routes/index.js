@@ -18,14 +18,14 @@ var oauth2 = new jsforce.OAuth2({
 // Get authorization url and redirect to it.
 //
 router.get('/oauth2/auth', function(req, res) {
-    if(req.param('enviroment') === 'test'){
+    if(req.body.enviroment === 'test'){
         this.url = 'https://test.salesforce.com';
     }
     else{
         this.url = 'https://login.salesforce.com';
     }
     console.log(url);
-  res.redirect(oauth2.getAuthorizationUrl({  }));
+ d res.redirect(oauth2.getAuthorizationUrl({  }));
 });
 
 router.get('/', function(req, res){
