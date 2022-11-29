@@ -5,7 +5,7 @@ var jsforce = require('jsforce');
 const app = express();
 require('dotenv').config();
 var conn;
-var url;
+var url = 'https://test.salesforce.com';
 
 const {LOGIN_URL, SALESFORCE_USERNAME , SALESFORCE_PASSWORD , SALESFORCE_TOKEN ,  CONSUMER_ID, CONSUMER_SECRET, SALESFORCE_CALLBACK} = process.env
 var oauth2 = new jsforce.OAuth2({
@@ -18,19 +18,13 @@ var oauth2 = new jsforce.OAuth2({
 //
 // Get authorization url and redirect to it.
 //
-router.get('/getUrl', function(req, res) {
-    console.log(req.param('enviroment'));
+router.get('/oauth2/auth', function(req, res) {
     if(req.param('enviroment') === 'test'){
         url = 'https://test.salesforce.com';
     }
     else{
         url = 'https://login.salesforce.com';
     }
-    console.log(url);
-  res.redirect('/oauth2/auth');
-});
-
-router.get('/oauth2/auth', function(req, res) {
   res.redirect(oauth2.getAuthorizationUrl({  }));
 });
 
