@@ -24,6 +24,7 @@ router.get('/oauth2/auth', function(req, res) {
     else{
         url = 'https://login.salesforce.com';
     }
+    debugger
     console.log(url);
     console.log(req);
     console.log(req.body.enviroment);
