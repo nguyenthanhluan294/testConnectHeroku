@@ -19,7 +19,7 @@ const {LOGIN_URL, SALESFORCE_USERNAME , SALESFORCE_PASSWORD , SALESFORCE_TOKEN ,
 //
 router.get('/oauth2/auth', function(req, res) {
     if(req.query.enviroment == 'test'){
-        var oauth2 = new jsforce.OAuth2({
+         oauth2 = new jsforce.OAuth2({
             // you can change loginUrl to connect to sandbox or prerelease env.
             loginUrl : 'https://test.salesforce.com',
             clientId : process.env.CONSUMER_ID,
