@@ -5,7 +5,7 @@ var jsforce = require('jsforce');
 const app = express();
 require('dotenv').config();
 var conn;
-let url;
+var url;
 const {LOGIN_URL, SALESFORCE_USERNAME , SALESFORCE_PASSWORD , SALESFORCE_TOKEN ,  CONSUMER_ID, CONSUMER_SECRET, SALESFORCE_CALLBACK} = process.env
 var oauth2 = new jsforce.OAuth2({
   // you can change loginUrl to connect to sandbox or prerelease env.
