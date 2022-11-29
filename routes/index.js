@@ -22,7 +22,7 @@ router.get('/oauth2/auth', function(req, res) {
         this.url = 'https://test.salesforce.com';
         var oauth2 = new jsforce.OAuth2({
             // you can change loginUrl to connect to sandbox or prerelease env.
-            loginUrl : this.url,
+            loginUrl : 'https://test.salesforce.com',
             clientId : process.env.CONSUMER_ID,
             clientSecret : process.env.CONSUMER_SECRET,
             redirectUri :  process.env.SALESFORCE_CALLBACK
@@ -33,7 +33,7 @@ router.get('/oauth2/auth', function(req, res) {
         this.url = 'https://login.salesforce.com';
         var oauth2 = new jsforce.OAuth2({
             // you can change loginUrl to connect to sandbox or prerelease env.
-            loginUrl : this.url,
+            loginUrl : 'https://login.salesforce.com',
             clientId : process.env.CONSUMER_ID,
             clientSecret : process.env.CONSUMER_SECRET,
             redirectUri :  process.env.SALESFORCE_CALLBACK
