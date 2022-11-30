@@ -97,5 +97,14 @@ router.post('/delete' , (req , res)=>{
         }
     })
 })
+
+var connnn = new jsforce.Connection({
+    sessionId : conn.accessToken,
+    serverUrl : 'https:/login.salesforce.com'
+  });
+  connnn.logout(function(err) {
+    if (err) { return console.error(err); }
+    // now the session has been expired.
+  });
 //ttest
 module.exports = router;
